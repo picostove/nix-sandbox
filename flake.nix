@@ -1,6 +1,8 @@
 {
   description = "stove's nix sandbox";
 
+  inputs.nixpkgs.url = "github:picostove/nixpkgs?ref=dev/stove/riscv64-cross-boot-test";
+
   outputs = {
     self,
     nixpkgs,
