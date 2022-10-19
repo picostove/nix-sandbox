@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1663385039,
-        "narHash": "sha256-KCo7+qF6G8cA2Cae3aIP1aEBAWEHGMl9oOmk4B/zfe8=",
+        "lastModified": 1666156340,
+        "narHash": "sha256-jRx9zs3fe/alu292djpCk2AVJrb5VfHxSWZN2oLL9qo=",
         "owner": "picostove",
         "repo": "nixpkgs",
-        "rev": "5e7a4be6e0e497b6a4d8b842d451cd427449e4a0",
+        "rev": "5409631feb0f3f263a3122730b17767862e2cb29",
         "type": "github"
       },
       "original": {
