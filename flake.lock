@@ -2,18 +2,17 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1666156340,
-        "narHash": "sha256-jRx9zs3fe/alu292djpCk2AVJrb5VfHxSWZN2oLL9qo=",
-        "owner": "picostove",
+        "lastModified": 1672844754,
+        "narHash": "sha256-o26WabuHABQsaHxxmIrR3AQRqDFUEdLckLXkVCpIjSU=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5409631feb0f3f263a3122730b17767862e2cb29",
+        "rev": "e9ade2c8240e00a4784fac282a502efff2786bdc",
         "type": "github"
       },
       "original": {
-        "owner": "picostove",
-        "ref": "dev/stove/riscv64-cross-boot-test",
-        "repo": "nixpkgs",
-        "type": "github"
+        "id": "nixpkgs",
+        "ref": "nixos-22.11",
+        "type": "indirect"
       }
     },
     "root": {

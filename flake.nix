@@ -1,7 +1,7 @@
 {
   description = "stove's nix sandbox";
 
-  inputs.nixpkgs.url = "github:picostove/nixpkgs?ref=dev/stove/riscv64-cross-boot-test";
+  inputs.nixpkgs.url = "nixpkgs/nixos-22.11";
 
   nixConfig = {
     extra-substituters = ["s3://rivos-nix-cache?region=us-west-1"];
@@ -20,5 +20,28 @@
     packages.x86_64-linux = {
       riscv-vm = cfg.config.system.build.vm;
     };
+
+    devShells.x86_64-linux.speccpu-novec = let
+      pkgs = (import nixpkgs) {
+        config.replaceStdenv = {pkgs, ...}: pkgs.gcc12Stdenv;
+        system = "x86_64-linux";
+        overlays = [
+          (final: prev: {
+            gfortran = prev.gfortran12;
+            glibc =
+              (prev.glibc.overrideAttrs (finalAttrs: {
+                dontStrip = true;
+              }))
+              .override {
+                stdenv = final.stdenvAdapters.withCFlags ["-ggdb" "-fno-tree-vectorize"] final.stdenv;
+              };
+          })
+        ];
+      };
+    in
+      pkgs.mkShell {
+        name = "gcc12-novectorization";
+        packages = [pkgs.gfortran pkgs.glibc.static];
+      };
   };
 }
