@@ -38,10 +38,12 @@
           })
         ];
       };
+      specStdenv = pkgs.stdenvAdapters.impureUseNativeOptimizations pkgs.stdenv;
     in
-      pkgs.mkShell {
+      pkgs.mkShell.override { stdenv = specStdenv; } {
         name = "gcc12-novectorization";
         packages = [pkgs.gfortran pkgs.glibc.static];
+        hardeningDisable = [ "all" ];
       };
   };
 }
