@@ -45,5 +45,30 @@
         packages = [pkgs.gfortran pkgs.glibc.static];
         hardeningDisable = [ "all" ];
       };
+
+    devShells.x86_64-linux.speccpu = let
+      pkgs = (import nixpkgs) {
+        config.replaceStdenv = {pkgs, ...}: pkgs.gcc12Stdenv;
+        system = "x86_64-linux";
+        overlays = [
+          (final: prev: {
+            gfortran = prev.gfortran12;
+            glibc =
+              (prev.glibc.overrideAttrs (finalAttrs: {
+                dontStrip = true;
+              }))
+              .override {
+                stdenv = final.stdenvAdapters.withCFlags ["-ggdb" ] final.stdenv;
+              };
+          })
+        ];
+      };
+      specStdenv = pkgs.stdenvAdapters.impureUseNativeOptimizations pkgs.stdenv;
+    in
+      pkgs.mkShell.override { stdenv = specStdenv; } {
+        name = "gcc12";
+        packages = [pkgs.gfortran pkgs.glibc.static];
+        hardeningDisable = [ "all" ];
+      };
   };
 }
